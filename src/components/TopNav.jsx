@@ -6,7 +6,7 @@ import FullMealDescription from "./FullMealDescription";
 function TopNav() {
  const [open, setOpen] = useState(false);
  const [mealName, setMealName] = useState("");
- const [ mealData, setMealData ] = useState (null);
+ const [mealData, setMealData] = useState (null);
 
  const handleSearchClick = async () => {
   if (mealName.trim() === "") {

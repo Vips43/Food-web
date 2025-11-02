@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+    /* styles.css or within a @layer utilities block in your main CSS file */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px; /* Adjust as needed */
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
