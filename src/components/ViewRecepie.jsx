@@ -17,7 +17,7 @@ function ViewRecepie({ data, onBack }) {
   <>
    <div className="max-w-full m-2 p-3">
     <div className="bg-gray-700 text-white p-2 gap-2">
-     <h3 className="capitalize text-center">
+     <h3 className="capitalize text-center my-1">
       <span className="text-gray-400">meal name: </span><span className="font-bold">{data.strMeal} </span>
      </h3>
      <div className="flex gap-2 items-center justify-between flex-wrap">
@@ -34,7 +34,7 @@ function ViewRecepie({ data, onBack }) {
      <div>
       <a
        href={data.strYoutube}
-       className="flex items-center gap-2 justify-center"
+       className="flex items-center gap-2 justify-end"
       >
        <h4>YouTube </h4>
        <i className="fa-brands fa-youtube text-red-600"></i>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LeftNav from "./LeftNav";
 import FindMeal from "./FindMeal";
 import FullMealDescription from "./FullMealDescription";
+import { Link } from "react-router-dom";
 
 function TopNav() {
  const [open, setOpen] = useState(false);
@@ -55,7 +56,7 @@ function TopNav() {
       </div>
      )}
     </div>
-    <h1 className="text-center font-semibold capitalize">food blog</h1>
+    <Link to="/"><h1 className="text-center font-semibold capitalize hover:underline">food blog</h1></Link>
     <div className="flex items-center gap-2">
      <FindMeal onChange={setMealName} />
      <i className="fa-solid fa-magnifying-glass mr-2 text-yellow-400" onClick={ handleSearchClick }></i>

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { getRecepieDetails } from "./APICalls";
 import ViewRecepie from "./ViewRecepie";
+import { Link } from "react-router-dom";
 
 function RandomMeals() {
  const [meals, setMeals] = useState([]);
  const [loading, setLoading] = useState(false);
  const [showMeals, setShowMeals] = useState(false);
- const [ selectedMeal, setSelectedMeal ] = useState(null);
+ const [selectedMeal, setSelectedMeal] = useState(null);
 
  const url = "https://www.themealdb.com/api/json/v1/1/random.php";
 
@@ -34,15 +35,18 @@ function RandomMeals() {
 
  const handleViewMore = async (mealName) => {
   const recipe = await getRecepieDetails(mealName);
-  if (recipe) {setSelectedMeal(recipe)}
-  else { console.log("No recipe found for: ", mealName); }
+  if (recipe) {
+   setSelectedMeal(recipe);
+  } else {
+   console.log("No recipe found for: ", mealName);
+  }
   console.log("Recipe details: ", recipe);
  };
 
  const handleBack = () => setSelectedMeal(null);
 
- if(selectedMeal){
-    return <ViewRecepie data={selectedMeal} onBack={handleBack} />
+ if (selectedMeal) {
+  return <ViewRecepie data={selectedMeal} onBack={handleBack} />;
  }
  return (
   <div className="bg-gray-300 p-4">
@@ -79,14 +83,16 @@ function RandomMeals() {
            />
           </div>
           <h4 className="font-semibold text-center mt-2">{item.strMeal}</h4>
-          <button
-           className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md block mx-auto mt-2"
-           onClick={() => {
-            handleViewMore(item.strMeal);
-           }}
-          >
-           View Recipe
-          </button>
+          <Link to={`/viewrecepie/${item.idMeal}`}>
+           <button
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md block mx-auto mt-2"
+            onClick={() => {
+             handleViewMore(item.strMeal);
+            }}
+           >
+            View Recipe
+           </button>
+          </Link>
          </div>
         </li>
        ))}
