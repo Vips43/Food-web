@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { getRecepieDetails } from "./APICalls";
 
 function ViewRecepie({ data, onBack }) {
@@ -16,6 +15,12 @@ function ViewRecepie({ data, onBack }) {
  return (
   <>
    <div className="max-w-full m-2 p-3">
+    <button
+     onClick={onBack}
+      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md mb-2"
+    >
+      ← Back to Meals
+    </button>
     <div className="bg-gray-700 text-white p-2 gap-2">
      <h3 className="capitalize text-center my-1">
       <span className="text-gray-400">meal name: </span><span className="font-bold">{data.strMeal} </span>
