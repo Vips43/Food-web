@@ -45,7 +45,9 @@ function ViewRecepie({ data, onBack }) {
      <div className="p-2 border border-gray-300">
       <img src={data.strMealThumb} alt="" />
      </div>
-     <div className="w-full p-2">
+     <div className="w-full p-2 flex flex-col">
+       
+       <div>
       <h3 className="font-bold text-lg my-2 text-center underline uppercase">
        Ingredients
       </h3>
@@ -57,11 +59,14 @@ function ViewRecepie({ data, onBack }) {
         </li>
        ))}
       </ul>
-     </div>
+       </div>
      <div className="p-3">
         <h3 className="font-bold text-center text-xl underline my-2">Coocking Instructions</h3>
       <p>{data.strInstructions}</p>
      </div>
+     
+     </div>
+     
     </div>
    </div>
   </>
