@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-function Meals() {
+function RandomMeals() {
  const [meals, setMeals] = useState([]);
  const [loading, setLoading] = useState(false);
  const [showMeals, setShowMeals] = useState(false);
  const url = "https://www.themealdb.com/api/json/v1/1/random.php";
 
  // Fetch multiple random meals
- const fetchMeals = async (count = 6) => {
+ const fetchMeals = async (count = 10) => {
   try {
    setLoading(true);
    const requests = Array.from({ length: count }, () =>
@@ -22,15 +22,15 @@ function Meals() {
   }
  };
 
- // Fetch meals initially (optional)
- useEffect(() => {
-  fetchMeals();
- }, []);
-
  const handleToggle = () => {
   setShowMeals((prev) => !prev);
   if (!showMeals) fetchMeals(); // refresh when opening
  };
+
+ // Fetch meals initially (optional)
+//  useEffect(() => {
+//   fetchMeals();
+//  }, []);
 
  return (
   <div className="bg-gray-300 p-4">
@@ -79,4 +79,4 @@ function Meals() {
  );
 }
 
-export default Meals;
+export default RandomMeals;

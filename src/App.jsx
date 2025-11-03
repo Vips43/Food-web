@@ -1,7 +1,6 @@
 import './App.css'
 import TopNav from './components/TopNav'
-import Meals from './components/Meals'
-import LeftNavNestedCat from './components/LeftNavNestedCat'
+import RandomMeals from './components/RandomMeals'
 
 function App() {
 
@@ -11,10 +10,10 @@ function App() {
     <TopNav />
     
     <div className='my-2 '>
-      <Meals />
+      <RandomMeals />
+
     </div>
 
-      {/* <LeftNavNestedCat cats={'goat'}/> */}
     </div>
     </>
   )
