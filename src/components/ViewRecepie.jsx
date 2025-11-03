@@ -17,17 +17,17 @@ function ViewRecepie({ data, onBack }) {
   <>
    <div className="max-w-full m-2 p-3">
     <div className="bg-gray-700 text-white p-2 gap-2">
-     <h3 className="capitalize font-semibold text-center">
+     <h3 className="capitalize text-center">
       <span className="text-gray-400">meal name: </span></span> <span className="font-bold">{data.strMeal} </span>
      </h3>
      <div className="flex gap-2 items-center justify-between flex-wrap">
-      <h3 className="capitalize font-semibold">
+      <h3 className="capitalize">
        <span className="text-gray-400">meal category: </span><span className="font-bold">{data.strCategory}</span>
       </h3>
-      <h3 className="capitalize font-semibold">
+      <h3 className="capitalize">
        <span className="text-gray-400">Dish from: </span> <span className="font-bold">{data.strArea} </span>
       </h3>
-      <h3 className="capitalize font-semibold">
+      <h3 className="capitalize">
        <span className="text-gray-400">Dish type: </span> <span className="font-bold">{data.strMeal}</span>
       </h3>
      </div>
