@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import LeftNav from "./LeftNav";
-import FindMeal from "./FindMeal";
-import FullMealDescription from "./FullMealDescription";
+import FindMeal from "./FindMeal"; 
 import { Link, useNavigate } from "react-router-dom";
 
 function TopNav() {
  const [open, setOpen] = useState(false);
  const [mealName, setMealName] = useState("");
  const navigate = useNavigate();
-
- const [mealData, setMealData] = useState (null);
 
  const handleSearchClick = async () => {
   if (mealName.trim() === "") {
@@ -22,9 +19,7 @@ function TopNav() {
     const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
     const data = await res.json()
     if (data.meals) {
-      setMealData(data.meals[0]);
       navigate(`/view_recepie/${encodeURIComponent(mealName)}`);
-      return;
     }else {
       console.log("No meal found with that name.");
     }
@@ -40,9 +35,8 @@ function TopNav() {
     <div className="lg:hidden md:hidden relative">
      <i
       className="fa-solid fa-bars text-2xl cursor-pointer p-2"
-      onClick={ToggleEvent}
-     ></i>
-
+      onClick={ToggleEvent}></i>
+     
      {/* Toggle LeftNav visibility */}
      {open && (
       <div

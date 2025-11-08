@@ -29,7 +29,6 @@ function LeftNav() {
    setSelectedCategory((prev) => (prev === catName ? null : catName));
  };
 
-
  return (
   <>
    <div className="absolute min-w-md border border-gray-400 mb-5 bg-white select-none">

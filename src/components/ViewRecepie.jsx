@@ -84,7 +84,7 @@ function ViewRecepie() {
        </div>
      <div className="p-3">
         <h3 className="font-bold text-center text-xl underline my-2">Coocking Instructions</h3>
-      <p>{data.strInstructions}</p>
+      <p className="whitespace-pre-line">{data.strInstructions}</p>
      </div>
      
      </div>
