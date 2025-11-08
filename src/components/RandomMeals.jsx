@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { getRecepieDetails } from "./APICalls";
-import ViewRecepie from "./ViewRecepie";
 import { Link } from "react-router-dom";
 
 function RandomMeals() {
  const [meals, setMeals] = useState([]);
  const [loading, setLoading] = useState(false);
  const [showMeals, setShowMeals] = useState(false);
- const [selectedMeal, setSelectedMeal] = useState(null);
 
  const url = "https://www.themealdb.com/api/json/v1/1/random.php";
 
@@ -33,22 +30,7 @@ function RandomMeals() {
   if (!showMeals) fetchMeals(); // refresh when opening
  };
 
- const handleViewMore = async (mealName) => {
-  const recipe = await getRecepieDetails(mealName);
-  if (recipe) {
-   setSelectedMeal(recipe);
-  } else {
-   console.log("No recipe found for: ", mealName);
-  }
-  console.log("Recipe details: ", recipe);
- };
-
- const handleBack = () => setSelectedMeal(null);
-
- if (selectedMeal) {
-  return <ViewRecepie data={selectedMeal} onBack={handleBack} />;
- }
- return (
+return (
   <div className="bg-gray-300 p-4">
    <div className="text-center mb-4">
     <button
@@ -83,13 +65,9 @@ function RandomMeals() {
            />
           </div>
           <h4 className="font-semibold text-center mt-2">{item.strMeal}</h4>
-          <Link to={`/viewrecepie/${item.idMeal}`}>
+          <Link to={`/view_recepie/${encodeURIComponent(item.strMeal)}`}>
            <button
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md block mx-auto mt-2"
-            onClick={() => {
-             handleViewMore(item.strMeal);
-            }}
-           >
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md block mx-auto mt-2">
             View Recipe
            </button>
           </Link>

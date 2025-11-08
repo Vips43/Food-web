@@ -1,6 +1,25 @@
+import { useNavigate, useParams } from "react-router-dom";
 import { getRecepieDetails } from "./APICalls";
+import { useEffect, useState } from "react";
 
-function ViewRecepie({ data, onBack }) {
+function ViewRecepie() {
+  const { mealName } = useParams();
+  const navigate = useNavigate();
+  const [data, setData] = useState(null);
+  const [ loading , setLoading ] = useState(true);
+
+ useEffect(() => {
+  const fetchData = async () => {
+    const result = await getRecepieDetails(mealName);
+    if(result) setData(result);
+    setLoading(false);
+  }
+  fetchData();
+ }, [mealName])
+
+ if(loading) return <p className="text-center mt-5 bg-gray-100">Loading recepie...</p>
+ if(!data) return <p className="text-center mt-5 bg-gray-100">Recepie not found</p>
+
  const ingredients = [];
 
  for (let i = 0; i < 20; i++) {
@@ -10,15 +29,13 @@ function ViewRecepie({ data, onBack }) {
    ingredients.push({ ingredient, measure });
   }
  }
- ingredients.map((item) => console.log(item));
-
+ 
  return (
   <>
    <div className="max-w-full m-2 p-3">
     <button
-     onClick={onBack}
-      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md mb-2"
-    >
+     onClick={()=> navigate(-1)}
+      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md mb-2">
       ← Back to Meals
     </button>
     <div className="bg-gray-700 text-white p-2 gap-2">

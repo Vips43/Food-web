@@ -9,16 +9,12 @@ function App() {
   return (
     <>
     <div className='p-2'>
+      <TopNav />
       <Routes>
-        <Route path='/' element={ <TopNav />} />
-        <Route path='/viewrecepie/' element={ <ViewRecepie />} />
+        <Route path='/' element={< RandomMeals/> } />
+        <Route path='/view_recepie/:mealName' element={ <ViewRecepie />} />
       </Routes>
     
-    
-    <div className='my-2 '>
-      <RandomMeals />
-
-    </div>
     </div>
     </>
   )

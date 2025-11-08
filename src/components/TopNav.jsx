@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import LeftNav from "./LeftNav";
 import FindMeal from "./FindMeal";
 import FullMealDescription from "./FullMealDescription";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function TopNav() {
  const [open, setOpen] = useState(false);
  const [mealName, setMealName] = useState("");
+ const navigate = useNavigate();
+
  const [mealData, setMealData] = useState (null);
 
  const handleSearchClick = async () => {
@@ -16,13 +18,12 @@ function TopNav() {
   }
 
   try {
-    console.log("Searching for meal:", mealName);
     // calling API
     const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
     const data = await res.json()
     if (data.meals) {
-      console.log(data.meals[0]);
       setMealData(data.meals[0]);
+      navigate(`/view_recepie/${encodeURIComponent(mealName)}`);
       return;
     }else {
       console.log("No meal found with that name.");
@@ -31,12 +32,11 @@ function TopNav() {
     console.log('there is error in fetching the data', error);
   }
  };
- const ToggleEvent = () => {
-  setOpen(!open);
- };
+ const ToggleEvent = () => setOpen((prev) => !prev);
  return (
   <>
    <div className="border rounded-md p-2 px-4 flex justify-between items-center  gap-4 transition-all">
+    {/*Mobile Menu */}
     <div className="lg:hidden md:hidden relative">
      <i
       className="fa-solid fa-bars text-2xl cursor-pointer p-2"
@@ -62,8 +62,6 @@ function TopNav() {
      <i className="fa-solid fa-magnifying-glass mr-2 text-yellow-400" onClick={ handleSearchClick }></i>
     </div>
    </div>
-  {/* Display meal data if available */}
-  {mealData && <FullMealDescription meal={mealData} /> }
   </>
  );
 }

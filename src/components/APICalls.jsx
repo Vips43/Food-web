@@ -12,8 +12,7 @@ export const getRecepieDetails = async (mealName) => {
        if (!res.ok) throw new Error(`HTTp error: ${res.status}`);
 
        const data = await res.json();
-       console.log('ViewRecepie data: ', data.meals?.[0]);
-       return data.meals?.[0] || null;
+       return data.meals ? data.meals[0] : null;
    } catch(err) {
       console.log('there is an error fetching ViewReceipe: ', err);
       return null;
