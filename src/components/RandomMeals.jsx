@@ -5,33 +5,30 @@ function RandomMeals() {
  const [meals, setMeals] = useState([]);
  const [loading, setLoading] = useState(false);
  const [showMeals, setShowMeals] = useState(false);
-
  const url = "https://www.themealdb.com/api/json/v1/1/random.php";
 
- // Fetch multiple random meals
  const fetchMeals = async (count = 10) => {
   try {
    setLoading(true);
-   const requests = Array.from({ length: count }, () =>
-    fetch(url).then((res) => res.json())
+   const reqs = Array.from({ length: count }, () =>
+    fetch(url).then((r) => r.json())
    );
-
-   const results = await Promise.all(requests);
-   setMeals(results.map((r) => r.meals[0]));
-  } catch (error) {
-   console.error("Error fetching meals:", error);
+   const res = await Promise.all(reqs);
+   setMeals(res.map((r) => r.meals[0]));
+  } catch (e) {
+   console.error(e);
   } finally {
    setLoading(false);
   }
  };
 
  const handleToggle = () => {
-  setShowMeals((prev) => !prev);
-  if (!showMeals) fetchMeals(); // refresh when opening
+  setShowMeals(!showMeals);
+  if (!showMeals) fetchMeals();
  };
 
-return (
-  <div className="bg-gray-300 p-4">
+ return (
+  <div className="bg-gray-100 dark:bg-gray-800 dark:text-gray-100 p-4 rounded-md mt-4">
    <div className="text-center mb-4">
     <button
      onClick={handleToggle}
@@ -48,30 +45,33 @@ return (
      </h3>
 
      {loading ? (
-      <p className="text-center text-gray-600">Fetching meals...</p>
+      <p className="text-center text-gray-600 dark:text-gray-400">
+       Fetching meals...
+      </p>
      ) : (
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
        {meals.map((item, i) => (
-        <li key={i} className="p-2 hover:bg-white transition">
-         <div className="shadow-md p-2 h-full">
-          <h3 className="capitalize text-center font-medium mb-2">
-           {item.strCategory}
-          </h3>
-          <div className="m-1 overflow-hidden rounded-md">
-           <img
-            src={item.strMealThumb}
-            alt={item.strMeal}
-            className="w-full hover:scale-105 hover:rotate-2 transition-transform"
-           />
-          </div>
-          <h4 className="font-semibold text-center mt-2">{item.strMeal}</h4>
-          <Link to={`/view_recepie/${encodeURIComponent(item.strMeal)}`}>
-           <button
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md block mx-auto mt-2">
-            View Recipe
-           </button>
-          </Link>
+        <li
+         key={i}
+         className="p-2 hover:bg-white dark:hover:bg-gray-700 transition rounded-md shadow-md"
+        >
+         <h3 className="capitalize text-center font-medium mb-2">
+          {item.strCategory}
+         </h3>
+         <div className="overflow-hidden rounded-md">
+          <img
+           src={item.strMealThumb}
+           alt={item.strMeal}
+           className="w-full hover:scale-105 transition-transform rounded-md"
+           loading="lazy"
+          />
          </div>
+         <h4 className="font-semibold text-center mt-2">{item.strMeal}</h4>
+         <Link to={`/viewrecepie/${encodeURIComponent(item.strMeal)}`}>
+          <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md block mx-auto mt-2">
+           View Recipe
+          </button>
+         </Link>
         </li>
        ))}
       </ul>

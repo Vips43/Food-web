@@ -1,64 +1,90 @@
-import React, { useState } from "react";
-import LeftNav from "./LeftNav";
-import FindMeal from "./FindMeal"; 
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import FindMeal from "./FindMeal";
+import LeftNav from "./LeftNav";
 
 function TopNav() {
  const [open, setOpen] = useState(false);
  const [mealName, setMealName] = useState("");
+ const [theme, setTheme] = useState("light");
  const navigate = useNavigate();
 
- const handleSearchClick = async () => {
-  if (mealName.trim() === "") {
-    console.log("Please enter a meal name to search.");
-    return;
-  }
+ // Load saved theme
+ useEffect(() => {
+  const saved = localStorage.getItem("theme") || "light";
+  setTheme(saved);
+  document.documentElement.classList.toggle("dark", saved === "dark");
+ }, []);
 
+ // Toggle dark/light
+ const toggleTheme = () => {
+  const newTheme = theme === "light" ? "dark" : "light";
+  setTheme(newTheme);
+  document.documentElement.classList.toggle("dark", newTheme === "dark");
+  localStorage.setItem("theme", newTheme);
+ };
+
+ const handleSearchClick = async () => {
+  if (!mealName.trim()) return;
   try {
-    // calling API
-    const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
-    const data = await res.json()
-    if (data.meals) {
-      navigate(`/view_recepie/${encodeURIComponent(mealName)}`);
-    }else {
-      console.log("No meal found with that name.");
-    }
-  } catch (error) {
-    console.log('there is error in fetching the data', error);
+   const res = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`
+   );
+   const data = await res.json();
+   if (data.meals) {
+    navigate(`/viewrecepie/${encodeURIComponent(mealName)}`);
+   } else {
+    alert("No meal found!");
+   }
+  } catch (err) {
+   console.error("Search failed:", err);
   }
  };
- const ToggleEvent = () => setOpen((prev) => !prev);
 
- 
  return (
-  <>
-   <div className="border border-gray-600 rounded-md p-2 px-4 flex justify-between items-center gap-4 sticky top-2 bg-black/80 transition-all">
-    {/*Mobile Menu */}
-    <div className="lg:hidden md:hidden relative">
-     <i
-      className="fa-solid fa-bars text-2xl cursor-pointer p-2"
-      onClick={ToggleEvent}></i>
-     
-     {/* Toggle LeftNav visibility */}
-     {open && (
-      <div
-       className={`absolute top-12 -left-4 z-50 transition-all duration-700 ${
-        open
-         ? "opacity-100 translate-x-0"
-         : "opacity-0 -translate-x-10 pointer-events-none"
-       }`}
-      >
-       <LeftNav />
-      </div>
-     )}
-    </div>
-    <Link to="/"><h1 className="text-center font-semibold capitalize hover:underline">food blog</h1></Link>
-    <div className="flex items-center gap-2">
-     <FindMeal onChange={setMealName} />
-     <i className="fa-solid fa-magnifying-glass mr-2 text-yellow-400" onClick={ handleSearchClick }></i>
-    </div>
+  <div className="border rounded-md p-2 px-4 flex justify-between items-center gap-4 bg-white dark:bg-gray-900 dark:text-gray-100 shadow-sm">
+   {/* Mobile Nav */}
+   <div className="lg:hidden md:hidden relative">
+    <i
+     className="fa-solid fa-bars text-2xl cursor-pointer p-2"
+     onClick={() => setOpen(!open)}
+    ></i>
+    {open && (
+     <div className="absolute top-12 left-0 z-50">
+      <LeftNav />
+     </div>
+    )}
    </div>
-  </>
+
+   {/* Brand */}
+   <Link to="/">
+    <h1 className="font-semibold capitalize hover:underline text-lg">
+     Food Blog
+    </h1>
+   </Link>
+
+   {/* Search + Theme */}
+   <div className="flex items-center gap-4">
+    <FindMeal onChange={setMealName} />
+    <i
+     className="fa-solid fa-magnifying-glass text-yellow-400 cursor-pointer"
+     onClick={handleSearchClick}
+    ></i>
+
+    {/* Theme Toggle */}
+    <button
+     onClick={toggleTheme}
+     className="p-2 rounded-md border dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+     title={theme === "light" ? "Switch to Dark" : "Switch to Light"}
+    >
+     {theme === "light" ? (
+      <i className="fa-solid fa-moon text-gray-800"></i>
+     ) : (
+      <i className="fa-solid fa-sun text-yellow-400"></i>
+     )}
+    </button>
+   </div>
+  </div>
  );
 }
 
