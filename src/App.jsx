@@ -14,7 +14,7 @@ function App() {
         <Route path='/' element={< RandomMeals/> } />
         <Route path='/view_recepie/:mealName' element={ <ViewRecepie />} />
       </Routes>
-    
+  
     </div>
     </>
   )
