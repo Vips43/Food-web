@@ -10,13 +10,13 @@ function FindMeal({ onChange }) {
     }
   return (
     <>
-    <div className="border rounded-md">
+    <div className="rounded-md">
         <input
           type="text"
           value={inputValue}
           onChange={handleChange}
           placeholder="Search for meals..."
-          className="w-full px-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          className="w-full px-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
         />
 
       </div>

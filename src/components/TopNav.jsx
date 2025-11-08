@@ -28,9 +28,11 @@ function TopNav() {
   }
  };
  const ToggleEvent = () => setOpen((prev) => !prev);
+
+ 
  return (
   <>
-   <div className="border rounded-md p-2 px-4 flex justify-between items-center  gap-4 transition-all">
+   <div className="border border-gray-600 rounded-md p-2 px-4 flex justify-between items-center gap-4 sticky top-2 bg-black/80 transition-all">
     {/*Mobile Menu */}
     <div className="lg:hidden md:hidden relative">
      <i

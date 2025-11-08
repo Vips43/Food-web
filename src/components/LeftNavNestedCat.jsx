@@ -21,13 +21,12 @@ function LeftNavNestedCat({ cats }) {
 
  return (
   <>
-   <ul className="ml-2 bg-gray-200">
+   <ul className="ml-2 bg-gray-800 text-gray-400">
     {meals.map((meal, i) => (
      <Link to={`/view_recepie/${encodeURIComponent(meal.strMeal)}`}>
-      <li
-       className="p-2 text-gray-600 hover:text-gray-950 hover:bg-gray-100"
-       key={meal.idMeal}>
-       {i + 1} - {meal.strMeal}
+      <li className="p-2 hover:text-gray-300 hover:bg-gray-600"
+       key={ meal.idMeal }>
+       {i + 1} - { meal.strMeal }
       </li>
      </Link>
     ))}

@@ -31,18 +31,18 @@ function LeftNav() {
 
  return (
   <>
-   <div className="absolute min-w-md border border-gray-400 mb-5 bg-white select-none">
-    <h1 className="font-semibold text-center border border-gray-200 shadow-xs p-1 m-1">
+   <div className="absolute min-w-md border border-gray-400 mb-5 bg-gray-900 text-gray-500 select-none">
+    <h1 className="font-semibold text-center border border-gray-700 rounded-lg shadow-xs p-1 m-1">
      All categories
     </h1>
 
     {loading ? (
-     <p className="p-2 text-gray-300">Loading categories...</p>
+     <p className="p-2 ">Loading categories...</p>
     ) : (
      <ul className="p-2 grid gap-2">
       {categoriesData.map((cat) => (
        <li
-        className="p-1 border border-gray-100 hover:bg-gray-100 rounded-md cursor-pointer"
+        className="p-1 border border-gray-800 hover:bg-gray-600 hover:text-yellow-400 rounded-md cursor-pointer"
         key={cat.idCategory}
         onClick={()=> handleClick(cat.strCategory)}
        >
