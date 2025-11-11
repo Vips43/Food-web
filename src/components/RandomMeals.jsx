@@ -62,7 +62,7 @@ function RandomMeals() {
           <img
            src={item.strMealThumb}
            alt={item.strMeal}
-           className="w-full hover:scale-105 transition-transform rounded-md"
+           className="w-full hover:scale-105 hover:rotate-2 transition-all rounded-md"
            loading="lazy"
           />
          </div>

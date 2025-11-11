@@ -70,22 +70,25 @@ function ViewRecepie() {
      />
     </div>
 
-    <div className="w-full p-2 flex flex-col">
-     <h3 className="font-bold text-lg text-center underline uppercase my-2">
-      Ingredients
-     </h3>
-     <ul className="grid grid-cols-2 gap-1">
-      {ingredients.map((i, idx) => (
-       <li key={idx}>
-        <span className="font-semibold">{i.ing}</span> : {i.measure}
-       </li>
-      ))}
-     </ul>
-
-     <h3 className="font-bold text-center text-xl underline my-2">
-      Instructions
-     </h3>
-     <p className="whitespace-pre-line text-sm">{data.strInstructions}</p>
+    <div className="w-full p-2 flex flex-col justify-between">
+     <div>
+      <h3 className="font-bold text-lg w-full lg:w-1/2 text-center  underline uppercase my-2">
+       Ingredients
+      </h3>
+      <ul className="grid grid-cols-2 gap-1">
+       {ingredients.map((i, idx) => (
+        <li key={idx}>
+         <span className="font-semibold">{i.ing}</span> : {i.measure}
+        </li>
+       ))}
+      </ul>
+     </div>
+     <div>
+      <h3 className="font-bold text-center text-xl underline my-2">
+       Instructions
+      </h3>
+      <p className="whitespace-pre-line text-sm">{data.strInstructions}</p>
+     </div>
     </div>
    </div>
   </div>
